@@ -1,0 +1,283 @@
+package com.example.baldor.globalceo;
+
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.VideoView;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public class MainActivity extends AppCompatActivity {
+
+    /**
+     * The {@link android.support.v4.view.PagerAdapter} that will provide
+     * fragments for each of the sections. We use a
+     * {@link FragmentPagerAdapter} derivative, which will keep every
+     * loaded fragment in memory. If this becomes too memory intensive, it
+     * may be best to switch to a
+     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     */
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+
+    /**
+     * The {@link ViewPager} that will host the section contents.
+     */
+    private ViewPager mViewPager;
+
+    private void copyAssets(String path)
+    {
+        String[] files = null;
+
+        try
+        {
+            files = getAssets().list(path);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        if (files.length == 0)
+            copyFile(path);
+        else
+        {
+            File dir = new File(getExternalFilesDir(null), path);
+
+            if (!dir.exists())
+                dir.mkdir();
+
+            for (int i = 0; i < files.length; i++)
+            {
+                copyAssets(path + "/" + files[i]);
+            }
+        }
+    }
+    private void copyFile(String filename)
+    {
+        InputStream in = null;
+
+        File file;
+        OutputStream out = null;
+
+        try
+        {
+            in = getAssets().open(filename);
+        } catch (IOException e)
+        {
+            Log.e("TAG", "ERROR WITH in = getAssets().open: " + filename);
+            e.printStackTrace();
+        }
+
+        file = new File(getExternalFilesDir(null), filename);
+
+        try
+        {
+            out = new FileOutputStream(file);
+        } catch (FileNotFoundException e)
+        {
+            Log.e("TAG", "ERROR WITH out = new FileOutputStream(file);");
+            e.printStackTrace();
+        }
+
+        byte[] data;
+
+        try
+        {
+            data = new byte[in.available()];
+
+            in.read(data);
+            out.write(data);
+
+            in.close();
+            out.close();
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();
+        }}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        copyAssets("globalceo");
+        setContentView(R.layout.activity_main);
+        WebView mWebView = (WebView) findViewById(R.id.webview);
+        mWebView.loadUrl("file:///android_asset/globalceo/events/index.html");
+        WebChromeClient chromeClient = new WebChromeClient(){
+            @Override
+            public void onShowCustomView(View view, CustomViewCallback callback) {
+                super.onShowCustomView(view, callback);
+                if (view instanceof FrameLayout){
+                    FrameLayout frame = (FrameLayout) view;
+                    if (frame.getFocusedChild() instanceof VideoView){
+                        VideoView video = (VideoView) frame.getFocusedChild();
+                        frame.removeView(video);
+                        MainActivity.this.setContentView(video);
+                        video.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                Log.d("TAG", "Video completo");
+                                MainActivity.this.setContentView(R.layout.activity_main);
+                                WebView wb = (WebView) MainActivity.this.findViewById(R.id.webview);
+//                                MainActivity.this.initWebView();
+                            }
+                        });
+//                        video.setOnErrorListener(this);
+                        video.start();
+                    }
+                }
+            }
+        };
+        mWebView.setWebChromeClient(chromeClient);
+//        mWebView.setWebViewClient(wvClient);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+//        mWebView.getSettings().setpl
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+
+      FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+      fab.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                      .setAction("Action", null).show();
+          }
+      });
+
+
+    }
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    
+  
+
+    /**
+     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * one of the sections/tabs/pages.
+     */
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            return PlaceholderFragment.newInstance(position + 1);
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "SECTION 1";
+                case 1:
+                    return "SECTION 2";
+                case 2:
+                    return "SECTION 3";
+            }
+            return null;
+        }
+    }
+
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+    public static class PlaceholderFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static PlaceholderFragment newInstance(int sectionNumber) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        public PlaceholderFragment() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            return rootView;
+        }
+    }
+}
