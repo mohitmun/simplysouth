@@ -1,11 +1,8 @@
 package com.example.baldor.globalceo;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,7 +14,7 @@ import android.widget.VideoView;
  * Created by baldor on 30/9/16.
  */
 
-public class VideoScreen extends AppCompatActivity {
+public class VideoScreen extends MyAppCompatActivity {
     public void myOnCreate(int res_id, final Class activityClass){
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -39,11 +36,11 @@ public class VideoScreen extends AppCompatActivity {
 
                 if(mute.getText().toString().equalsIgnoreCase("mute")){
 //                    m.setVolume(0F, 0F);
-                    mute();
+                    BaseActivity.mute(VideoScreen.this);
                     mute.setText("Unmute");
                 }else{
 //                    m.setVolume(75.0F,75.0F);
-                    unmute();
+                    BaseActivity.unmute(VideoScreen.this);
                     mute.setText("Mute");
                 }
             }
@@ -63,16 +60,25 @@ public class VideoScreen extends AppCompatActivity {
         videoHolder.start();
     }
 
-    private void mute() {
-        am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        am.setStreamMute(AudioManager.STREAM_MUSIC, true);
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 
-    public void unmute() {
-        am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-        am.setStreamMute(AudioManager.STREAM_MUSIC, false);
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
-    public static AudioManager am;
+
+    //    private void mute() {
+//        am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//        am.setStreamMute(AudioManager.STREAM_MUSIC, true);
+//    }
+//
+//    public void unmute() {
+//        am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+//        am.setStreamMute(AudioManager.STREAM_MUSIC, false);
+//    }
     private MediaPlayer m;
 //    MediaPlayer.OnPreparedListener PreparedListener = new MediaPlayer.OnPreparedListener(){
 //

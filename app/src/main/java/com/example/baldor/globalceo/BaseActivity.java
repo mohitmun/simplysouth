@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -23,15 +22,90 @@ import android.widget.VideoView;
  * Created by baldor on 30/9/16.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends MyAppCompatActivity {
     WebView mWebView;
+    private String url;
+
     public void myOnCreate(String url, int small_video){
+        this.url = url;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        copyAssets("globalceo");
         setContentView(R.layout.activity_main);
         mWebView = (WebView) findViewById(R.id.webview);
         mWebView.loadUrl(url);
+
+//        mWebView.getSettings().setpl
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+//        mSectionsPagerAdapter = new MainActivity.SectionsPagerAdapter(getSupportFragmentManager());
+//
+//        // Set up the ViewPager with the sections adapter.
+//        mViewPager = (ViewPager) findViewById(R.id.container);
+//        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+        if(small_video != 0){
+            videoHolder = (VideoView)findViewById(R.id.small_videoview);
+            Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + small_video);
+            videoHolder.setVideoURI(video);
+            MediaController mc = new MediaController(this);
+            mc.setAnchorView(videoHolder);
+            mc.setMediaPlayer(videoHolder);
+            final Button mute = (Button) findViewById(R.id.mute);
+            mute.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+    //                if(m == null){
+    //                    return;
+    //                }
+
+                    if(mute.getText().toString().equalsIgnoreCase("mute")){
+    //                    m.setVolume(0F, 0F);
+                        mute(BaseActivity.this);
+                        mute.setText("Unmute");
+                    }else{
+    //                    m.setVolume(75.0F,75.0F);
+                        unmute(BaseActivity.this);
+                        mute.setText("Mute");
+                    }
+                }
+            });
+
+        }
+
+    }
+    VideoView videoHolder;
+
+
+    public static void mute(Context context) {
+        am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        am.setStreamMute(AudioManager.STREAM_MUSIC, true);
+    }
+
+    public static void unmute(Context context) {
+        Log.d("====", "unmuted");
+        am = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+        am.setStreamMute(AudioManager.STREAM_MUSIC, false);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onStart() {
         WebChromeClient chromeClient = new WebChromeClient(){
             @Override
             public void onShowCustomView(View view, CustomViewCallback callback) {
@@ -90,69 +164,9 @@ public class BaseActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         mWebView.getSettings().setJavaScriptEnabled(true);
-//        mWebView.getSettings().setpl
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-//        mSectionsPagerAdapter = new MainActivity.SectionsPagerAdapter(getSupportFragmentManager());
-//
-//        // Set up the ViewPager with the sections adapter.
-//        mViewPager = (ViewPager) findViewById(R.id.container);
-//        mViewPager.setAdapter(mSectionsPagerAdapter);
+        super.onStart();
 
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-        if(small_video != 0){
-            videoHolder = (VideoView)findViewById(R.id.small_videoview);
-            Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + small_video);
-            videoHolder.setVideoURI(video);
-            MediaController mc = new MediaController(this);
-            mc.setAnchorView(videoHolder);
-            mc.setMediaPlayer(videoHolder);
-            final Button mute = (Button) findViewById(R.id.mute);
-            mute.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-    //                if(m == null){
-    //                    return;
-    //                }
-
-                    if(mute.getText().toString().equalsIgnoreCase("mute")){
-    //                    m.setVolume(0F, 0F);
-                        mute();
-                        mute.setText("Unmute");
-                    }else{
-    //                    m.setVolume(75.0F,75.0F);
-                        unmute();
-                        mute.setText("Mute");
-                    }
-                }
-            });
-
-        }
-
-    }
-    VideoView videoHolder;
-
-
-    private void mute() {
-        am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        am.setStreamMute(AudioManager.STREAM_MUSIC, true);
-    }
-
-    public void unmute() {
-        am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-        am.setStreamMute(AudioManager.STREAM_MUSIC, false);
     }
 
     @Override
