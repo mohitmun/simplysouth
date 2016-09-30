@@ -99,7 +99,11 @@ public class VideoScreen extends AppCompatActivity {
     public void jump(Class activityClass) {
         if (isFinishing())
             return;
+//        if(activityClass == MainActivity.class){
         startActivity(new Intent(this, activityClass));
-        finish();
+
+//        }else{
+            finish();
+//        }
     }
 }
