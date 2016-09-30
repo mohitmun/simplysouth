@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -129,6 +130,9 @@ public class BaseActivity extends MyAppCompatActivity {
         }else{
             if(video_wrapper != null){
                 video_wrapper.setVisibility(View.GONE);
+                if(videoHolder != null){
+                    videoHolder.stopPlayback();
+                }
             }
         }
 
@@ -161,10 +165,53 @@ public class BaseActivity extends MyAppCompatActivity {
             }
         };
         mWebView.setWebChromeClient(chromeClient);
-
+        if (Build.VERSION.SDK_INT >= 19) {
+            mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        }
+        else {
+            mWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
+                if(!showed && small_video != 0){
+                    showed = true;
+                    videoHolder = (VideoView)findViewById(R.id.small_videoview);
+                    Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + small_video);
+                    videoHolder.setVideoURI(video);
+                    MediaController mc = new MediaController(BaseActivity.this);
+                    mc.setAnchorView(videoHolder);
+                    mc.setMediaPlayer(videoHolder);
+                    final Button mute = (Button) findViewById(R.id.mute);
+                    mute.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //                if(m == null){
+                            //                    return;
+                            //                }
+
+                            if(mute.getText().toString().equalsIgnoreCase("mute")){
+                                //                    m.setVolume(0F, 0F);
+                                mute(BaseActivity.this);
+                                mute.setText("Unmute");
+                            }else{
+                                //                    m.setVolume(75.0F,75.0F);
+                                unmute(BaseActivity.this);
+                                mute.setText("Mute");
+                            }
+                        }
+                    });
+                    small_video = 0;
+
+
+                }else{
+                    if(video_wrapper != null){
+                        video_wrapper.setVisibility(View.GONE);
+                        if(videoHolder != null){
+                            videoHolder.stopPlayback();
+                        }
+                    }
+                }
                 if(videoHolder != null){
                      video_wrapper = findViewById(R.id.small_videoview_wrapper);
                     video_wrapper.setVisibility(View.VISIBLE);
@@ -172,6 +219,9 @@ public class BaseActivity extends MyAppCompatActivity {
                     videoHolder.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         public void onCompletion(MediaPlayer mp) {
                             video_wrapper.setVisibility(View.GONE);
+                            if(videoHolder != null){
+                                videoHolder.stopPlayback();
+                            }
                         }
                     });
                 }
@@ -184,6 +234,44 @@ public class BaseActivity extends MyAppCompatActivity {
 //                    startActivity(new Intent(BaseActivity.this, MainActivity.class));
 //                    finish();
 //                }
+                if(!showed && small_video != 0){
+                    showed = true;
+                    videoHolder = (VideoView)findViewById(R.id.small_videoview);
+                    Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + small_video);
+                    videoHolder.setVideoURI(video);
+                    MediaController mc = new MediaController(BaseActivity.this);
+                    mc.setAnchorView(videoHolder);
+                    mc.setMediaPlayer(videoHolder);
+                    final Button mute = (Button) findViewById(R.id.mute);
+                    mute.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //                if(m == null){
+                            //                    return;
+                            //                }
+
+                            if(mute.getText().toString().equalsIgnoreCase("mute")){
+                                //                    m.setVolume(0F, 0F);
+                                mute(BaseActivity.this);
+                                mute.setText("Unmute");
+                            }else{
+                                //                    m.setVolume(75.0F,75.0F);
+                                unmute(BaseActivity.this);
+                                mute.setText("Mute");
+                            }
+                        }
+                    });
+                    small_video = 0;
+
+
+                }else{
+                    if(video_wrapper != null){
+                        video_wrapper.setVisibility(View.GONE);
+                        if(videoHolder != null){
+                            videoHolder.stopPlayback();
+                        }
+                    }
+                }
                 if (url.contains("shopping-internal")) {
                     // magic
                     startActivity(new Intent(BaseActivity.this, ShoppingVideo.class));
@@ -202,9 +290,9 @@ public class BaseActivity extends MyAppCompatActivity {
                     reload = false;
                     return true;
                 }
-                if(video_wrapper!= null){
-                    video_wrapper.setVisibility(View.GONE);
-                }
+//                if(video_wrapper!= null){
+//                    video_wrapper.setVisibility(View.GONE);
+//                }
                 unmute(BaseActivity.this);
                 small_video = 0;
                 reload = false;
