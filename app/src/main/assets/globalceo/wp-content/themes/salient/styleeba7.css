@@ -3109,6 +3109,7 @@ body .vc_text_separator div {
 
 body .wpb_text_column {
 	margin-bottom: 0px;
+	margin-top: 50px;
 }
 
 body .wpb_text_column h2:last-child, body .wpb_text_column h3:last-child {
