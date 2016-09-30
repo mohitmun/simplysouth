@@ -123,7 +123,6 @@ public class BaseActivity extends MyAppCompatActivity {
                 }
             }
         };
-        mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         mWebView.setWebChromeClient(chromeClient);
         if (Build.VERSION.SDK_INT >= 19) {
             mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
@@ -224,9 +223,15 @@ public class BaseActivity extends MyAppCompatActivity {
         });
 
         mWebView.getSettings().setJavaScriptEnabled(true);
+//        mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+
         mWebView.setClickable(true);
         mWebView.setEnabled(true);
         mWebView.loadUrl(url);
+        mWebView.getSettings().setDatabaseEnabled(true);
+        mWebView.getSettings().setDomStorageEnabled(true);
+        mWebView.getSettings().setAppCacheEnabled(true);
+        mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         super.onStart();
 
     }
