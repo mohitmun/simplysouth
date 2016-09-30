@@ -1,6 +1,8 @@
 package com.example.baldor.globalceo;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +29,25 @@ public class VideoScreen extends AppCompatActivity {
         mc.setAnchorView(videoHolder);
         mc.setMediaPlayer(videoHolder);
         Button skip = (Button) findViewById(R.id.skip);
+        final Button mute = (Button) findViewById(R.id.mute);
+        mute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                if(m == null){
+//                    return;
+//                }
+
+                if(mute.getText().toString().equalsIgnoreCase("mute")){
+//                    m.setVolume(0F, 0F);
+                    mute();
+                    mute.setText("Unmute");
+                }else{
+//                    m.setVolume(75.0F,75.0F);
+                    unmute();
+                    mute.setText("Mute");
+                }
+            }
+        });
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,29 +59,41 @@ public class VideoScreen extends AppCompatActivity {
                 jump(activityClass);
             }
         });
-        videoHolder.setOnPreparedListener(PreparedListener);
+//        videoHolder.setOnPreparedListener(PreparedListener);
         videoHolder.start();
     }
 
-    MediaPlayer.OnPreparedListener PreparedListener = new MediaPlayer.OnPreparedListener(){
+    private void mute() {
+        am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        am.setStreamMute(AudioManager.STREAM_MUSIC, true);
+    }
 
-        @Override
-        public void onPrepared(MediaPlayer m) {
-            try {
-                if (m.isPlaying()) {
-                    m.stop();
-                    m.release();
-                    m = new MediaPlayer();
-                }
-
-                m.setVolume(0f, 0f);
-                m.setLooping(false);
-                m.start();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
+    public void unmute() {
+        am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        am.setStreamMute(AudioManager.STREAM_MUSIC, false);
+    }
+    public static AudioManager am;
+    private MediaPlayer m;
+//    MediaPlayer.OnPreparedListener PreparedListener = new MediaPlayer.OnPreparedListener(){
+//
+//        @Override
+//        public void onPrepared(MediaPlayer m) {
+//            try {
+//                if (m.isPlaying()) {
+//                    m.stop();
+//                    m.release();
+//                    m = new MediaPlayer();
+//                }
+//
+////                m.setVolume(0f, 0f);
+//                m.setLooping(false);
+//                m.start();
+//                VideoScreen.this.m = m;
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    };
 
 
     public void jump(Class activityClass) {
