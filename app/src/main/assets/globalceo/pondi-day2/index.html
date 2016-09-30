@@ -3,7 +3,7 @@
 
 <html lang="en-US" >
 
-<!-- Mirrored from flarepath.in.md-in-50.webhostbox.net/globalceo/pondi-day2/ by HTTrack Website Copier/3.x [XR&CO'2013], Thu, 29 Sep 2016 20:36:41 GMT -->
+<!-- Mirrored from flarepath.in.md-in-50.webhostbox.net/globalceo/pondi-day2/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2016 22:56:02 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
 
@@ -13,7 +13,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
-	
+
 
 <!--Shortcut icon-->
 	<link rel="shortcut icon" href="#" />
@@ -61,7 +61,7 @@ img.emoji {
 <script type='text/javascript' src='../wp-content/themes/salient/js/modernizr61da.js?ver=2.6.2'></script>
 <link rel='https://api.w.org/' href='../wp-json/index.html' />
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="../xmlrpc0db0.php?rsd" />
-<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../wp-includes/wlwmanifest.xml" /> 
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../wp-includes/wlwmanifest.xml" />
 <meta name="generator" content="WordPress 4.6.1" />
 <link rel="canonical" href="index.html" />
 <link rel='shortlink' href='../indexbcc1.html?p=549' />
@@ -79,7 +79,7 @@ img.emoji {
 		timelines.each(function(){
 			var timeline = $(this),
 				timelineComponents = {};
-			//cache timeline components 
+			//cache timeline components
 			timelineComponents['timelineWrapper'] = timeline.find('.events-wrapper');
 			timelineComponents['eventsWrapper'] = timelineComponents['timelineWrapper'].children('.events');
 			timelineComponents['fillingLine'] = timelineComponents['eventsWrapper'].children('.filling-line');
@@ -141,8 +141,8 @@ img.emoji {
 		//retrieve translateX value of timelineComponents['eventsWrapper']
 		var translateValue = getTranslateValue(timelineComponents['eventsWrapper']),
 			wrapperWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', ''));
-		//translate the timeline to the left('next')/right('prev') 
-		(string == 'next') 
+		//translate the timeline to the left('next')/right('prev')
+		(string == 'next')
 			? translateTimeline(timelineComponents, translateValue - wrapperWidth + eventsMinDistance, wrapperWidth - timelineTotWidth)
 			: translateTimeline(timelineComponents, translateValue + wrapperWidth - eventsMinDistance);
 	}
@@ -155,7 +155,7 @@ img.emoji {
 		if ( newContent.length > 0 ) { //if there's a next/prev event - show it
 			var selectedDate = timelineComponents['eventsWrapper'].find('.selected'),
 				newEvent = ( string == 'next' ) ? selectedDate.parent('li').next('li').children('a') : selectedDate.parent('li').prev('li').children('a');
-			
+
 			updateFilling(newEvent, timelineComponents['fillingLine'], timelineTotWidth);
 			updateVisibleContent(newEvent, timelineComponents['eventsContent']);
 			newEvent.addClass('selected');
@@ -199,7 +199,7 @@ img.emoji {
 	}
 
 	function setDatePosition(timelineComponents, min) {
-		for (i = 0; i < timelineComponents['timelineDates'].length; i++) { 
+		for (i = 0; i < timelineComponents['timelineDates'].length; i++) {
 		    var distance = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][i]),
 		    	distanceNorm = Math.round(distance/timelineComponents['eventsMinLapse']) + 2;
 		    timelineComponents['timelineEvents'].eq(i).css('left', distanceNorm*min+'px');
@@ -214,7 +214,7 @@ img.emoji {
 		timelineComponents['eventsWrapper'].css('width', totalWidth+'px');
 		updateFilling(timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents['fillingLine'], totalWidth);
 		updateTimelinePosition('next', timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents);
-	
+
 		return totalWidth;
 	}
 
@@ -279,13 +279,13 @@ img.emoji {
 			var singleDate = $(this),
 				dateComp = singleDate.data('date').split('T');
 			if( dateComp.length > 1 ) { //both DD/MM/YEAR and time are provided
-				var dayComp = dateComp[0].split('../../index.html'),
+				var dayComp = dateComp[0].split('http://flarepath.in.md-in-50.webhostbox.net/'),
 					timeComp = dateComp[1].split(':');
 			} else if( dateComp[0].indexOf(':') >=0 ) { //only time is provide
 				var dayComp = ["2000", "0", "0"],
 					timeComp = dateComp[0].split(':');
 			} else { //only DD/MM/YEAR
-				var dayComp = dateComp[0].split('../../index.html'),
+				var dayComp = dateComp[0].split('http://flarepath.in.md-in-50.webhostbox.net/'),
 					timeComp = ["0", "0"];
 			}
 			var	newDate = new Date(dayComp[2], dayComp[1]-1, dayComp[0], timeComp[0], timeComp[1]);
@@ -301,7 +301,7 @@ img.emoji {
 	function minLapse(dates) {
 		//determine the minimum distance among events
 		var dateDistances = [];
-		for (i = 1; i < dates.length; i++) { 
+		for (i = 1; i < dates.length; i++) {
 		    var distance = daydiff(dates[i-1], dates[i]);
 		    dateDistances.push(distance);
 		}
@@ -343,23 +343,23 @@ jQuery(document).ready(function() {
     var ellipsestext = "...";
     var moretext = "Know more >";
     var lesstext = "Show less";
-    
+
 
     jQuery('.more').each(function() {
         var content = jQuery(this).html();
- 
+
         if(content.length > showChar) {
- 
+
             var c = content.substr(0, showChar);
             var h = content.substr(showChar, content.length - showChar);
- 
+
             var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
- 
+
             jQuery(this).html(html);
         }
- 
+
     });
- 
+
     jQuery(".morelink").click(function(){
         if(jQuery(this).hasClass("less")) {
             jQuery(this).removeClass("less");
@@ -372,7 +372,7 @@ jQuery(document).ready(function() {
         jQuery(this).prev().toggle();
         return false;
     });
-});</script><style type="text/css" data-type="vc_custom-css">/* -------------------------------- 
+});</script><style type="text/css" data-type="vc_custom-css">/* --------------------------------
 
 Primary style
 
@@ -397,9 +397,9 @@ a {
   text-decoration: none;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-Main Components 
+Main Components
 
 -------------------------------- */
 .cd-horizontal-timeline {
@@ -438,7 +438,7 @@ Main Components
   height: 100%;
   margin: 0 40px;
   overflow: hidden;
-    background-image: url(http://dev.flarepath.co.in/websites/globalceo/wp-content/uploads/2016/09/Banana-leaf-1.png);
+    background-image: url(/wp-content/uploads/2016/09/Banana-leaf-1.png);
     background-size: 100% auto;
     background-position: center center;
 }
@@ -593,7 +593,7 @@ Main Components
   -ms-transform: translateX(-50%) translateY(-50%);
   -o-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
-  background: url(http://dev.flarepath.co.in/websites/globalceo/wp-content/uploads/cd-arrow.svg) no-repeat 0 0;
+  background: url(/wp-content/uploads/cd-arrow.svg) no-repeat 0 0;
 }
 .cd-timeline-navigation a.prev {
   left: 0;
@@ -812,7 +812,7 @@ table {
     display: block;
 }
 p.eventdetails, .cd-horizontal-timeline .events-content li h5{padding-top: 10px;}</style><noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
- 
+
 
 </head>
 
@@ -820,94 +820,94 @@ p.eventdetails, .cd-horizontal-timeline .events-content li h5{padding-top: 10px;
 <body class="page page-id-549 page-template-default ascend wpb-js-composer js-comp-ver-4.12 vc_responsive" data-footer-reveal="false" data-footer-reveal-shadow="none" data-cae="easeOutCubic" data-cad="650" data-aie="none" data-ls="pretty_photo" data-apte="standard" data-hhun="0" data-fancy-form-rcs="default" data-form-style="default" data-is="minimal" data-button-style="default" data-header-inherit-rc="false" data-header-search="false" data-animated-anchors="true" data-ajax-transitions="true" data-full-width-header="false" data-slide-out-widget-area="false" data-slide-out-widget-area-style="slide-out-from-right" data-user-set-ocm="off" data-loading-animation="none" data-bg-header="true" data-ext-responsive="true" data-header-resize="0" data-header-color="light"  data-smooth-scrolling="0" data-permanent-transparent="1" data-responsive="1" >
 
 
- <div id="header-space" data-header-mobile-fixed='1'></div> 
+ <div id="header-space" data-header-mobile-fixed='1'></div>
 
 <div id="header-outer" data-has-menu="false" data-transparent-header="true" data-remove-border="true" class="transparent" data-mobile-fixed="1" data-ptnm="false" data-lhe="default" data-user-set-bg="#ffffff" data-format="default" data-permanent-transparent="1" data-cart="false" data-transparency-option="" data-shrink-num="6" data-full-width="false" data-using-secondary="0" data-using-logo="" data-logo-height="" data-m-logo-height="24" data-padding="28" data-header-resize="0">
-	
-		
-	<header id="top">
-		
-		<div class="container">
-			
-			<div class="row">
-				  
-				<div class="col span_3">
-					
-					<a id="logo" href="../index.html" class="no-image">
 
-						GlobalCEO 
+
+	<header id="top">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col span_3">
+
+					<a id="logo" href="/" class="no-image">
+
+						GlobalCEO
 
 					</a>
 
 				</div><!--/span_3-->
-				
+
 				<div class="col span_9 col_last">
-					
-										
+
+
 					<nav>
 						<ul class="buttons" data-user-set-ocm="off">
 							<li id="search-btn"><div><a href="#searchbox"><span class="icon-salient-search" aria-hidden="true"></span></a></div> </li>
-						
+
 													</ul>
-						<ul class="sf-menu">	
+						<ul class="sf-menu">
 							<li class="no-menu-assigned"><a href="#">No menu assigned</a></li>						</ul>
-						
+
 					</nav>
-					
+
 				</div><!--/span_9-->
-			
+
 			</div><!--/row-->
-			
+
 		</div><!--/container-->
-		
+
 	</header>
-	
-	
-	<div class="ns-loading-cover"></div>		
-	
+
+
+	<div class="ns-loading-cover"></div>
+
 
 </div><!--/header-outer-->
 
 
 <div id="search-outer" class="nectar">
-		
+
 	<div id="search">
-	  	 
+
 		<div class="container">
-		  	 	
+
 		     <div id="search-box">
-		     	
+
 		     	<div class="col span_12">
 			      	<form action="http://flarepath.in.md-in-50.webhostbox.net/globalceo" method="GET">
 			      		<input type="text" name="s"  value="Start Typing..." data-placeholder="Start Typing..." />
 			      	</form>
 			      	<span><i>Press enter to begin your search</i></span>		        </div><!--/span_12-->
-			      
+
 		     </div><!--/search-box-->
-		     
+
 		     <div id="close"><a href="#"><span class="icon-salient-x" aria-hidden="true"></span></a></div>
-		     
+
 		 </div><!--/container-->
-	    
+
 	</div><!--/search-->
-	  
-</div><!--/search-outer--> 
+
+</div><!--/search-outer-->
 
 <div id="mobile-menu" data-mobile-fixed="1">
-	
+
 	<div class="container">
 		<ul>
-			<li><a href="#">No menu assigned!</a></li>		
+			<li><a href="#">No menu assigned!</a></li>
 		</ul>
 	</div>
-	
+
 </div>
 
 
 <div id="ajax-loading-screen" data-disable-fade-on-click="0" data-effect="standard" data-method="standard">
-	
-			<span class="loading-icon none"> 
-			<span class="default-loading-icon spin"></span> 
+
+			<span class="loading-icon none">
+			<span class="default-loading-icon spin"></span>
 		</span>
 	</div>
 
@@ -916,22 +916,22 @@ p.eventdetails, .cd-horizontal-timeline .events-content li h5{padding-top: 10px;
 
 
 <div class="container-wrap">
-	
+
 	<div class=" main-content">
-		
+
 		<div class="row">
-			
+
 			<div id="nectar_fullscreen_rows" data-animation="zoom-out-parallax" data-row-bg-animation="ken_burns" data-animation-speed="medium" data-content-overflow="scrollbar" data-dot-navigation="transparent" data-footer="none" data-anchors="off">
-	<div id="fws_57ed7ae53b21a"  data-midnight="dark" data-bg-mobile-hidden="" class="wpb_row vc_row-fluid vc_row full-width-content standard_section   "  style=""><div class="full-page-inner-wrap-outer"><div class="full-page-inner-wrap" data-name="" data-content-pos="full_height"><div class="full-page-inner"><div class="row-bg-wrap"> <div class="row-bg using-image   "  style="background-image: url(../wp-content/uploads/2016/09/Bg-1.png); background-position: left top; background-repeat: no-repeat; " data-color_overlay="" data-color_overlay_2="" data-gradient_direction="" data-overlay_strength="0.3" data-enable_gradient="false"></div> </div><div class="col span_12 dark left">
+	<div id="fws_57ed9bf6946e5"  data-midnight="dark" data-bg-mobile-hidden="" class="wpb_row vc_row-fluid vc_row full-width-content standard_section   "  style=""><div class="full-page-inner-wrap-outer"><div class="full-page-inner-wrap" data-name="" data-content-pos="full_height"><div class="full-page-inner"><div class="row-bg-wrap"> <div class="row-bg using-image   "  style="background-image: url(../wp-content/uploads/2016/09/Bg-1.png); background-position: left top; background-repeat: no-repeat; " data-color_overlay="" data-color_overlay_2="" data-gradient_direction="" data-overlay_strength="0.3" data-enable_gradient="false"></div> </div><div class="col span_12 dark left">
 	<div  class="vc_col-sm-12 wpb_column column_container vc_column_container col no-extra-padding"  data-bg-cover="" data-padding-pos="top-bottom" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-hover-bg="" data-hover-bg-opacity="1" data-animation="" data-delay="0">
 		<div class="vc_column-inner">
 			<div class="wpb_wrapper">
 				<div class="img-with-aniamtion-wrap center" data-max-width="100%"><div class="inner"><img data-shadow="none" data-shadow-direction="middle" class="img-with-animation " data-delay="0" height="100%" width="100%" data-animation="fade-in" src="../wp-content/uploads/2016/09/Upper-border.png" alt="" /></div></div>
-	<div id="fws_57ed7ae53bd86" data-midnight="" data-bg-mobile-hidden="" class="wpb_row vc_row-fluid vc_row standard_section   "  style="padding-top: 0px; padding-bottom: 0px; "><div class="row-bg-wrap"> <div class="row-bg   "  style=""></div> </div><div class="col span_12  left">
+	<div id="fws_57ed9bf69528e" data-midnight="" data-bg-mobile-hidden="" class="wpb_row vc_row-fluid vc_row standard_section   "  style="padding-top: 0px; padding-bottom: 0px; "><div class="row-bg-wrap"> <div class="row-bg   "  style=""></div> </div><div class="col span_12  left">
 	<div  class="vc_col-sm-12 wpb_column column_container vc_column_container col padding-2-percent"  data-bg-cover="" data-padding-pos="top-bottom" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-hover-bg="" data-hover-bg-opacity="1" data-animation="" data-delay="0">
 		<div class="vc_column-inner">
 		<div class="wpb_wrapper">
-			
+
 	<div class="wpb_text_column wpb_content_element " >
 		<div class="wpb_wrapper">
 			<h1 style="text-align: center;">PONDICHERRY</h1>
@@ -940,9 +940,9 @@ p.eventdetails, .cd-horizontal-timeline .events-content li h5{padding-top: 10px;
 		</div>
 	</div>
 
-		</div> 
+		</div>
 	</div>
-	</div> 
+	</div>
 </div></div>
 	<div class="wpb_raw_code wpb_content_element wpb_raw_html">
 		<div class="wpb_wrapper">
@@ -964,7 +964,7 @@ p.eventdetails, .cd-horizontal-timeline .events-content li h5{padding-top: 10px;
 				<span class="filling-line" aria-hidden="true"></span>
 			</div> <!-- .events -->
 		</div> <!-- .events-wrapper -->
-			
+
 		<ul class="cd-timeline-navigation">
 			<li><a href="#0" class="prev inactive">Prev</a></li>
 			<li><a href="#0" class="next">Next</a></li>
@@ -1016,7 +1016,7 @@ Lucky for you, the magic and splendor of Pondicherry will be intoxicating enough
 					You will make the two hour journey armed with a packed breakfast while looking forward to the great day in Pondicherry!<br>
 Pondicherry (affectionately known as Pondy) is the capital city of the Indian union territory of Puducherry. It is, and has been officially known by the alternative name Puducherry since 2006. <br>
 A French colonial settlement until 1954, it preserves its French legacy in its French Quarter, with tree-lined streets, mustard-colored colonial villas and chic boutiques.<br>
-If peace is most sought after, then Pondicherry is surely one of the choicest holiday destinations in South India. The town offers a unique experience with its mix of modern heritage and spiritual culture. With a predominantly historical background, Pondicherry takes one centuries back in time. 
+If peace is most sought after, then Pondicherry is surely one of the choicest holiday destinations in South India. The town offers a unique experience with its mix of modern heritage and spiritual culture. With a predominantly historical background, Pondicherry takes one centuries back in time.
 </p>
 <img src="../wp-content/uploads/2016/09/pondi2.png" width="150px">
 			</li>
@@ -1046,7 +1046,7 @@ He presently engages himself in conducting Auroville specific visits for the pur
 				<h2>Travel to Villa Shanti </h2>
                                 <h6>11:45AM - 12:15PM (Duration: 30mins) </h6>
                                 <img class="event-img" src="../wp-content/uploads/2016/09/villa.png" width="400px">
-				
+
 			</li>
 
 			<li data-date="16/09/2014">
@@ -1092,19 +1092,19 @@ It embodies the highest standards in Indian hospitality balanced with elegant re
 		</div>
 	</div>
 
-	<div id="fws_57ed7ae53ca42" data-midnight="" data-bg-mobile-hidden="" class="wpb_row vc_row-fluid vc_row standard_section   "  style="padding-top: 0px; padding-bottom: 2%; "><div class="row-bg-wrap"> <div class="row-bg   "  style=""></div> </div><div class="col span_12  left">
+	<div id="fws_57ed9bf697849" data-midnight="" data-bg-mobile-hidden="" class="wpb_row vc_row-fluid vc_row standard_section   "  style="padding-top: 0px; padding-bottom: 2%; "><div class="row-bg-wrap"> <div class="row-bg   "  style=""></div> </div><div class="col span_12  left">
 	<div  class="vc_col-sm-2 wpb_column column_container vc_column_container col no-extra-padding"  data-bg-cover="" data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-hover-bg="" data-hover-bg-opacity="1" data-animation="" data-delay="0">
 		<div class="vc_column-inner">
 		<div class="wpb_wrapper">
-			
-		</div> 
+
+		</div>
 	</div>
-	</div> 
+	</div>
 
 	<div  class="vc_col-sm-8 wpb_column column_container vc_column_container col no-extra-padding"  data-bg-cover="" data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-hover-bg="" data-hover-bg-opacity="1" data-animation="" data-delay="0">
 		<div class="vc_column-inner">
 		<div class="wpb_wrapper">
-			
+
 	<div class="wpb_text_column wpb_content_element " >
 		<div class="wpb_wrapper">
 			<p style="text-align: center;"><a class="nectar-button large accent-color regular-button"  href="#" data-color-override="#316c56" data-hover-color-override="false" data-hover-text-color-override="#fff"><span>SHOPPING</span></a>    <a class="nectar-button large extra-color-1 regular-button"  href="#" data-color-override="#eb4900" data-hover-color-override="false" data-hover-text-color-override="#fff"><span>STAY</span></a>    <a class="nectar-button large extra-color-2 regular-button"  href="#" data-color-override="#a22038" data-hover-color-override="false" data-hover-text-color-override="#fff"><span>FOOD</span></a>    <a class="nectar-button large extra-color-3 regular-button"  href="#" data-color-override="#422754" data-hover-color-override="false" data-hover-text-color-override="#fff"><span>SIGHTSEEING</span></a></p>
@@ -1119,108 +1119,108 @@ It embodies the highest standards in Indian hospitality balanced with elegant re
 		</div>
 	</div>
 
-		</div> 
+		</div>
 	</div>
-	</div> 
+	</div>
 
 	<div  class="vc_col-sm-2 wpb_column column_container vc_column_container col no-extra-padding"  data-bg-cover="" data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-hover-bg="" data-hover-bg-opacity="1" data-animation="" data-delay="0">
 		<div class="vc_column-inner">
 		<div class="wpb_wrapper">
-			
-		</div> 
-	</div>
-	</div> 
-</div></div><div class="img-with-aniamtion-wrap center" data-max-width="100%"><div class="inner"><img data-shadow="none" data-shadow-direction="middle" class="img-with-animation " data-delay="0" height="100%" width="100%" data-animation="fade-in" src="../wp-content/uploads/2016/09/Lower-border.png" alt="" /></div></div>
-			</div> 
+
 		</div>
-	</div> 
+	</div>
+	</div>
+</div></div><div class="img-with-aniamtion-wrap center" data-max-width="100%"><div class="inner"><img data-shadow="none" data-shadow-direction="middle" class="img-with-animation " data-delay="0" height="100%" width="100%" data-animation="fade-in" src="../wp-content/uploads/2016/09/Lower-border.png" alt="" /></div></div>
+			</div>
+		</div>
+	</div>
 </div></div></div></div></div><!--inner-wrap-->
 </div>
 		</div><!--/row-->
-		
+
 	</div><!--/container-->
-	
+
 </div><!--/container-wrap-->
 
 
 <div id="footer-outer" data-midnight="light" data-using-widget-area="true">
-	
-	
-			
+
+
+
 	<div id="footer-widgets">
-		
+
 		<div class="container">
-			
+
 			<div class="row">
-				
-								
+
+
 				<div class="col span_3">
 				      <!-- Footer widget area 1 -->
-		              	
-		              	  <div class="widget">		
+
+		              	  <div class="widget">
 						  	 <h4 class="widgettitle">Widget Area 1</h4>
 						 	 <p class="no-widget-added"><a href="../wp-login3a96.html">Click here to assign a widget to this area.</a></p>
 				     	  </div>
 				     				</div><!--/span_3-->
-				
+
 				<div class="col span_3">
 					 <!-- Footer widget area 2 -->
-		             	
-		                  <div class="widget">			
+
+		                  <div class="widget">
 						 	 <h4 class="widgettitle">Widget Area 2</h4>
 						 	 <p class="no-widget-added"><a href="../wp-login3a96.html">Click here to assign a widget to this area.</a></p>
 				     	  </div>
-				     				     
+
 				</div><!--/span_3-->
-				
+
 									<div class="col span_3">
 						 <!-- Footer widget area 3 -->
-			              		
-			              	  <div class="widget">			
+
+			              	  <div class="widget">
 							  	<h4 class="widgettitle">Widget Area 3</h4>
 							  	<p class="no-widget-added"><a href="../wp-login3a96.html">Click here to assign a widget to this area.</a></p>
-							  </div>		   
-					     					     
+							  </div>
+
 					</div><!--/span_3-->
-								
+
 									<div class="col span_3">
 						 <!-- Footer widget area 4 -->
-			              	
-			              	<div class="widget">		
+
+			              	<div class="widget">
 							    <h4>Widget Area 4</h4>
 							    <p class="no-widget-added"><a href="../wp-login3a96.html">Click here to assign a widget to this area.</a></p>
-							 </div><!--/widget-->	
-					     					     
+							 </div><!--/widget-->
+
 					</div><!--/span_3-->
-								
+
 			</div><!--/row-->
-			
+
 		</div><!--/container-->
-	
+
 	</div><!--/footer-widgets-->
-	
-	
-	
+
+
+
 		<div class="row" id="copyright">
-			
+
 			<div class="container">
-				
+
 				<div class="col span_5">
-					
+
 											<p>&copy; 2016 GlobalCEO.  </p>
-										
+
 				</div><!--/span_5-->
-				
+
 				<div class="col span_7 col_last">
 					<ul id="social">
 																																																																																																																							</ul>
 				</div><!--/span_7-->
-			
+
 			</div><!--/container-->
-			
+
 		</div><!--/row-->
-		
-		
+
+
 </div><!--/footer-outer-->
 
 
@@ -1242,9 +1242,9 @@ var nectarLove = {"ajaxurl":"http:\/\/flarepath.in.md-in-50.webhostbox.net\/glob
 <script type='text/javascript' src='../wp-content/themes/salient/js/initf9ae.js?ver=7.5.02'></script>
 <script type='text/javascript' src='../wp-includes/js/wp-embed.min1c9b.js?ver=4.6.1'></script>
 <script type='text/javascript' src='../wp-content/plugins/js_composer_salient/assets/js/dist/js_composer_front.min0147.js?ver=4.12'></script>
-	
+
 
 </body>
 
-<!-- Mirrored from flarepath.in.md-in-50.webhostbox.net/globalceo/pondi-day2/ by HTTrack Website Copier/3.x [XR&CO'2013], Thu, 29 Sep 2016 20:39:49 GMT -->
+<!-- Mirrored from flarepath.in.md-in-50.webhostbox.net/globalceo/pondi-day2/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 29 Sep 2016 22:56:02 GMT -->
 </html>

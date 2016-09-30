@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.MediaController;
 import android.widget.VideoView;
 
 /**
@@ -22,6 +23,9 @@ public class VideoScreen extends AppCompatActivity {
         VideoView videoHolder = (VideoView)findViewById(R.id.videoview);
         Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + res_id);
         videoHolder.setVideoURI(video);
+        MediaController mc = new MediaController(this);
+        mc.setAnchorView(videoHolder);
+        mc.setMediaPlayer(videoHolder);
         Button skip = (Button) findViewById(R.id.skip);
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,8 +38,29 @@ public class VideoScreen extends AppCompatActivity {
                 jump(activityClass);
             }
         });
+        videoHolder.setOnPreparedListener(PreparedListener);
         videoHolder.start();
     }
+
+    MediaPlayer.OnPreparedListener PreparedListener = new MediaPlayer.OnPreparedListener(){
+
+        @Override
+        public void onPrepared(MediaPlayer m) {
+            try {
+                if (m.isPlaying()) {
+                    m.stop();
+                    m.release();
+                    m = new MediaPlayer();
+                }
+
+                m.setVolume(0f, 0f);
+                m.setLooping(false);
+                m.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
 
     public void jump(Class activityClass) {
