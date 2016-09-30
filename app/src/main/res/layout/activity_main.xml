@@ -59,6 +59,7 @@
                 android:text="Mute"
                 android:id="@+id/mute"
                 android:textSize="12px"
+                android:height="17px"
                 android:layout_alignParentBottom="true"
 
                 />
