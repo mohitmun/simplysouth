@@ -13,4 +13,10 @@ public class Food extends BaseActivity{
         myOnCreate("file:///android_asset/globalceo/food-internal/index.html", R.raw.food);
 
     }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
 }

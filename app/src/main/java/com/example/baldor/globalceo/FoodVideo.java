@@ -16,6 +16,10 @@ public class FoodVideo extends VideoScreen{
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         jump(Food.class);
         return true;

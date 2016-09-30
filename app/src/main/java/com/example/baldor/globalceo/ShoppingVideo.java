@@ -21,4 +21,8 @@ public class ShoppingVideo extends VideoScreen{
         return true;
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
 }

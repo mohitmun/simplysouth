@@ -25,9 +25,12 @@ import android.widget.VideoView;
 public class BaseActivity extends MyAppCompatActivity {
     WebView mWebView;
     private String url;
+    private int small_video;
+    boolean reload = true;
 
     public void myOnCreate(String url, int small_video){
         this.url = url;
+        this.small_video = small_video;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        copyAssets("globalceo");
@@ -55,6 +58,29 @@ public class BaseActivity extends MyAppCompatActivity {
 //                        .setAction("Action", null).show();
 //            }
 //        });
+
+    }
+    VideoView videoHolder;
+
+
+    public static void mute(Context context) {
+        am = (AudioManager) context.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+        am.setStreamMute(AudioManager.STREAM_MUSIC, true);
+    }
+
+    public static void unmute(Context context) {
+        Log.d("====", "unmuted");
+        am = (AudioManager)context.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+        am.setStreamMute(AudioManager.STREAM_MUSIC, false);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onStart() {
         if(small_video != 0){
             videoHolder = (VideoView)findViewById(R.id.small_videoview);
             Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + small_video);
@@ -66,46 +92,32 @@ public class BaseActivity extends MyAppCompatActivity {
             mute.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-    //                if(m == null){
-    //                    return;
-    //                }
+                    //                if(m == null){
+                    //                    return;
+                    //                }
 
                     if(mute.getText().toString().equalsIgnoreCase("mute")){
-    //                    m.setVolume(0F, 0F);
+                        //                    m.setVolume(0F, 0F);
                         mute(BaseActivity.this);
                         mute.setText("Unmute");
                     }else{
-    //                    m.setVolume(75.0F,75.0F);
+                        //                    m.setVolume(75.0F,75.0F);
                         unmute(BaseActivity.this);
                         mute.setText("Mute");
                     }
                 }
             });
+            small_video = 0;
 
+
+        }else{
+            if(video_wrapper != null){
+                video_wrapper.setVisibility(View.GONE);
+            }
         }
 
-    }
-    VideoView videoHolder;
-
-
-    public static void mute(Context context) {
-        am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        am.setStreamMute(AudioManager.STREAM_MUSIC, true);
-    }
-
-    public static void unmute(Context context) {
-        Log.d("====", "unmuted");
-        am = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        am.setStreamMute(AudioManager.STREAM_MUSIC, false);
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
-    protected void onStart() {
+        unmute(BaseActivity.this);
+        small_video = 0;
         WebChromeClient chromeClient = new WebChromeClient(){
             @Override
             public void onShowCustomView(View view, CustomViewCallback callback) {
@@ -137,8 +149,8 @@ public class BaseActivity extends MyAppCompatActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 if(videoHolder != null){
-                    View v = findViewById(R.id.small_videoview_wrapper);
-                    v.setVisibility(View.VISIBLE);
+                     video_wrapper = findViewById(R.id.small_videoview_wrapper);
+                    video_wrapper.setVisibility(View.VISIBLE);
                     videoHolder.start();
                 }
                 super.onPageFinished(view, url);
@@ -146,29 +158,41 @@ public class BaseActivity extends MyAppCompatActivity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (url.contains("shopping")) {
+
+                if (url.contains("shopping-internal")) {
                     // magic
                     startActivity(new Intent(BaseActivity.this, ShoppingVideo.class));
+                    reload = false;
                     return true;
-                }else if(url.contains("stay")){
+                }else if(url.contains("stay-internal")){
                     startActivity(new Intent(BaseActivity.this, StayVideo.class));
+                    reload = false;
                     return true;
-                }else if(url.contains("food")){
+                }else if(url.contains("food-internal")){
                     startActivity(new Intent(BaseActivity.this, FoodVideo.class));
+                    reload = false;
                     return true;
-                }else if(url.contains("sightseeing")){
+                }else if(url.contains("sightseeing-internal")){
                     startActivity(new Intent(BaseActivity.this, SightVideo.class));
+                    reload = false;
                     return true;
                 }
-
+                if(video_wrapper!= null){
+                    video_wrapper.setVisibility(View.GONE);
+                }
+                unmute(BaseActivity.this);
+                small_video = 0;
+                reload = false;
                 return false;
             }
         });
         mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.setClickable(true);
+        mWebView.setEnabled(true);
         super.onStart();
 
     }
-
+    View video_wrapper;
     @Override
     public void onBackPressed() {
         if(mWebView != null){

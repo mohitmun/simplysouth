@@ -21,4 +21,10 @@ public class SightVideo extends VideoScreen{
         return true;
     }
 
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
 }

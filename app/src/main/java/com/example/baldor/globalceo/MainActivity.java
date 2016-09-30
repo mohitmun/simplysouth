@@ -110,9 +110,12 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myOnCreate("file:///android_asset/globalceo/events/index.html",0);
-
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
     @Override
     protected void onStart() {
 
