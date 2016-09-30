@@ -82,9 +82,6 @@ public class BaseActivity extends MyAppCompatActivity {
 
     @Override
     protected void onResume() {
-        if(reload && mWebView !=null && url.equals("/globalceo/events/index.html")){
-            mWebView.loadUrl(url);
-        }
         super.onResume();
     }
 
@@ -227,7 +224,10 @@ public class BaseActivity extends MyAppCompatActivity {
 
         mWebView.setClickable(true);
         mWebView.setEnabled(true);
-        mWebView.loadUrl(url);
+        if(!loaded){
+            loaded = true;
+            mWebView.loadUrl(url);
+        }
         mWebView.getSettings().setDatabaseEnabled(true);
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setAppCacheEnabled(true);
@@ -235,6 +235,8 @@ public class BaseActivity extends MyAppCompatActivity {
         super.onStart();
 
     }
+
+    boolean loaded = false;
 
     private void showOrHideVideo() {
         Log.d("=====", "wiow: showed:" + showed + " smallvideo" + small_video );
