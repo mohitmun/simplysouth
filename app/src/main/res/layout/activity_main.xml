@@ -28,12 +28,42 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <WebView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:id="@+id/webview"
         android:layout_height="match_parent">
 
-    </WebView>
+        <WebView
+            android:layout_width="match_parent"
+            android:id="@+id/webview"
+            android:layout_height="match_parent">
+
+        </WebView>
+        <RelativeLayout
+            android:id="@+id/small_videoview_wrapper"
+            android:layout_alignTop="@+id/webview"
+            android:layout_alignRight="@+id/webview"
+            android:visibility="gone"
+            android:layout_width="184px"
+            android:layout_height="184px">
+
+            <VideoView
+                android:layout_width="wrap_content"
+                android:id="@+id/small_videoview"
+                android:layout_height="wrap_content">
+
+            </VideoView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mute"
+                android:id="@+id/mute"
+                android:layout_alignParentBottom="true"
+
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"

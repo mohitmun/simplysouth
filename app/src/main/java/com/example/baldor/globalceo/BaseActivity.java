@@ -1,7 +1,10 @@
 package com.example.baldor.globalceo;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,7 +14,9 @@ import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.MediaController;
 import android.widget.VideoView;
 
 /**
@@ -19,7 +24,7 @@ import android.widget.VideoView;
  */
 
 public class BaseActivity extends AppCompatActivity {
-    public void myOnCreate(String url){
+    public void myOnCreate(String url, int small_video){
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        copyAssets("globalceo");
@@ -94,6 +99,48 @@ public class BaseActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 //            }
 //        });
+        if(small_video != 0){
+            View v = findViewById(R.id.small_videoview_wrapper);
+            v.setVisibility(View.VISIBLE);
+            VideoView videoHolder = (VideoView)findViewById(R.id.small_videoview);
+            Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + small_video);
+            videoHolder.setVideoURI(video);
+            MediaController mc = new MediaController(this);
+            mc.setAnchorView(videoHolder);
+            mc.setMediaPlayer(videoHolder);
+            final Button mute = (Button) findViewById(R.id.mute);
+            mute.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+    //                if(m == null){
+    //                    return;
+    //                }
+
+                    if(mute.getText().toString().equalsIgnoreCase("mute")){
+    //                    m.setVolume(0F, 0F);
+                        mute();
+                        mute.setText("Unmute");
+                    }else{
+    //                    m.setVolume(75.0F,75.0F);
+                        unmute();
+                        mute.setText("Mute");
+                    }
+                }
+            });
+            videoHolder.start();
+        }
 
     }
+
+
+    private void mute() {
+        am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        am.setStreamMute(AudioManager.STREAM_MUSIC, true);
+    }
+
+    public void unmute() {
+        am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        am.setStreamMute(AudioManager.STREAM_MUSIC, false);
+    }
+    public static AudioManager am;
 }
