@@ -4100,6 +4100,7 @@ html.no-overflow-y {
 .full-page-inner-wrap[data-content-pos="full_height"] .full-page-inner > .span_12 > .col > .column-inner-wrap > .column-inner > .wpb_wrapper > .wpb_row > .span_12,
 .full-page-inner-wrap[data-content-pos="full_height"] .full-page-inner > .span_12 > .col > .column-inner-wrap > .column-inner > .wpb_wrapper.only_rows > .wpb_row > .span_12 > .col {
 	height: 100%;
+	margin-bottom: 50px;
 }
 
 .full-page-inner-wrap[data-content-pos="full_height"] .full-page-inner > .span_12 > .col > .vc_column-inner > .wpb_wrapper.only_rows[data-inner-row-num="1"] > .wpb_row,

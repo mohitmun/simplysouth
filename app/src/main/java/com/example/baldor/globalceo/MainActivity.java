@@ -64,6 +64,18 @@ public class MainActivity extends BaseActivity {
             }
         }
     }
+
+    @Override
+    protected void onResume() {
+        if(reload && mWebView !=null){
+//            Log.d("====", "LOLOL");
+            myOnCreate("file:///android_asset/globalceo/events/index.html",0);
+//            mWebView.loadUrl(url);
+
+        }
+        super.onResume();
+    }
+
     private void copyFile(String filename)
     {
         InputStream in = null;

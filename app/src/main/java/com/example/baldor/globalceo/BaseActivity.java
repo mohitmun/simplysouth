@@ -26,13 +26,18 @@ public class BaseActivity extends MyAppCompatActivity {
     WebView mWebView;
     private String url;
     private int small_video;
-    boolean reload = true;
+    boolean reload = false;
 
     public void myOnCreate(String url, int small_video){
         this.url = url;
         this.small_video = small_video;
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        try{
+
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }catch (Exception e){
+
+        }
 //        copyAssets("globalceo");
         setContentView(R.layout.activity_main);
         mWebView = (WebView) findViewById(R.id.webview);
@@ -72,6 +77,15 @@ public class BaseActivity extends MyAppCompatActivity {
         Log.d("====", "unmuted");
         am = (AudioManager)context.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
         am.setStreamMute(AudioManager.STREAM_MUSIC, false);
+    }
+
+    @Override
+    protected void onResume() {
+        if(reload && mWebView !=null && url.equals("/globalceo/events/index.html")){
+            Log.d("====", "LOLOL");
+            mWebView.loadUrl(url);
+        }
+        super.onResume();
     }
 
     @Override
@@ -139,6 +153,7 @@ public class BaseActivity extends MyAppCompatActivity {
                         });
 //                        video.setOnErrorListener(this);
                         video.start();
+
                     }
                 }
             }
@@ -152,13 +167,21 @@ public class BaseActivity extends MyAppCompatActivity {
                      video_wrapper = findViewById(R.id.small_videoview_wrapper);
                     video_wrapper.setVisibility(View.VISIBLE);
                     videoHolder.start();
+                    videoHolder.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        public void onCompletion(MediaPlayer mp) {
+                            video_wrapper.setVisibility(View.GONE);
+                        }
+                    });
                 }
                 super.onPageFinished(view, url);
             }
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
+//                if(reload && url.contains("/globalceo/events/index.html")){
+//                    startActivity(new Intent(BaseActivity.this, MainActivity.class));
+//                    finish();
+//                }
                 if (url.contains("shopping-internal")) {
                     // magic
                     startActivity(new Intent(BaseActivity.this, ShoppingVideo.class));
@@ -195,9 +218,8 @@ public class BaseActivity extends MyAppCompatActivity {
     View video_wrapper;
     @Override
     public void onBackPressed() {
-        if(mWebView != null){
-            mWebView.setWebViewClient(new WebViewClient());
-        }
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
         super.onBackPressed();
     }
 
