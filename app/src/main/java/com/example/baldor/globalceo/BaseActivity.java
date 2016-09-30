@@ -217,7 +217,7 @@ public class BaseActivity extends MyAppCompatActivity {
 //                if(video_wrapper!= null){
 //                    video_wrapper.setVisibility(View.GONE);
 //                }
-                unmute(BaseActivity.this);
+//                unmute(BaseActivity.this);
                 reload = false;
                 return false;
             }
