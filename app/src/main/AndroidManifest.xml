@@ -20,10 +20,14 @@
         </activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".FoodVideo"/>
+        <activity android:name=".Food"/>
         <activity android:name=".ShoppingVideo"/>
-        <activity android:name=".SightVideo"/>
-        <activity android:name=".StayVideo"/>
         <activity android:name=".Shopping"/>
+        <activity android:name=".SightVideo"/>
+        <activity android:name=".Sight"/>
+        <activity android:name=".StayVideo"/>
+        <activity android:name=".Stay"/>
+        >
     </application>
 
 </manifest>
