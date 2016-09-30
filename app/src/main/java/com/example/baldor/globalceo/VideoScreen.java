@@ -66,6 +66,13 @@ public class VideoScreen extends MyAppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
     }

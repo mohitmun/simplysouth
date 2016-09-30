@@ -93,9 +93,11 @@ public class BaseActivity extends MyAppCompatActivity {
         super.onRestart();
     }
 
+    boolean showed = false;
     @Override
     protected void onStart() {
-        if(small_video != 0){
+        if(!showed && small_video != 0){
+            showed = true;
             videoHolder = (VideoView)findViewById(R.id.small_videoview);
             Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + small_video);
             videoHolder.setVideoURI(video);

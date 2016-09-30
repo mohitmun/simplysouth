@@ -58,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:text="Mute"
                 android:id="@+id/mute"
+                android:textSize="12px"
                 android:layout_alignParentBottom="true"
 
                 />
