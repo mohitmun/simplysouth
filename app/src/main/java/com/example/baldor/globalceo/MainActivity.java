@@ -1,28 +1,17 @@
 package com.example.baldor.globalceo;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,7 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -120,61 +109,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        copyAssets("globalceo");
-        setContentView(R.layout.activity_main);
-        WebView mWebView = (WebView) findViewById(R.id.webview);
-        mWebView.loadUrl("file:///android_asset/globalceo/events/index.html");
-        WebChromeClient chromeClient = new WebChromeClient(){
-            @Override
-            public void onShowCustomView(View view, CustomViewCallback callback) {
-                super.onShowCustomView(view, callback);
-                if (view instanceof FrameLayout){
-                    FrameLayout frame = (FrameLayout) view;
-                    if (frame.getFocusedChild() instanceof VideoView){
-                        VideoView video = (VideoView) frame.getFocusedChild();
-                        frame.removeView(video);
-                        MainActivity.this.setContentView(video);
-                        video.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mp) {
-                                Log.d("TAG", "Video completo");
-                                MainActivity.this.setContentView(R.layout.activity_main);
-                                WebView wb = (WebView) MainActivity.this.findViewById(R.id.webview);
-//                                MainActivity.this.initWebView();
-                            }
-                        });
-//                        video.setOnErrorListener(this);
-                        video.start();
-                    }
-                }
-            }
-        };
-        mWebView.setWebChromeClient(chromeClient);
-//        mWebView.setWebViewClient(wvClient);
-        mWebView.getSettings().setJavaScriptEnabled(true);
-//        mWebView.getSettings().setpl
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-
-      FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-      fab.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                      .setAction("Action", null).show();
-          }
-      });
-
+        myOnCreate("file:///android_asset/globalceo/events/index.html");
 
     }
 

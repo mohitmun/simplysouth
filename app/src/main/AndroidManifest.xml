@@ -19,6 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".FoodVideo"/>
+        <activity android:name=".ShoppingVideo"/>
+        <activity android:name=".SightVideo"/>
+        <activity android:name=".StayVideo"/>
+        <activity android:name=".Shopping"/>
     </application>
 
 </manifest>
