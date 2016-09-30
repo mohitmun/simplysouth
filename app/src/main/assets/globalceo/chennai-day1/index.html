@@ -13,7 +13,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
-
+	
 
 <!--Shortcut icon-->
 	<link rel="shortcut icon" href="#" />
@@ -61,7 +61,7 @@ img.emoji {
 <script type='text/javascript' src='../wp-content/themes/salient/js/modernizr61da.js?ver=2.6.2'></script>
 <link rel='https://api.w.org/' href='../wp-json/index.html' />
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="../xmlrpc0db0.php?rsd" />
-<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../wp-includes/wlwmanifest.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../wp-includes/wlwmanifest.xml" /> 
 <meta name="generator" content="WordPress 4.6.1" />
 <link rel="canonical" href="index.html" />
 <link rel='shortlink' href='../index42fe.html?p=447' />
@@ -82,7 +82,7 @@ jQuery(document).ready(function($){
 		timelines.each(function(){
 			var timeline = $(this),
 				timelineComponents = {};
-			//cache timeline components
+			//cache timeline components 
 			timelineComponents['timelineWrapper'] = timeline.find('.events-wrapper');
 			timelineComponents['eventsWrapper'] = timelineComponents['timelineWrapper'].children('.events');
 			timelineComponents['fillingLine'] = timelineComponents['eventsWrapper'].children('.filling-line');
@@ -144,8 +144,8 @@ jQuery(document).ready(function($){
 		//retrieve translateX value of timelineComponents['eventsWrapper']
 		var translateValue = getTranslateValue(timelineComponents['eventsWrapper']),
 			wrapperWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', ''));
-		//translate the timeline to the left('next')/right('prev')
-		(string == 'next')
+		//translate the timeline to the left('next')/right('prev') 
+		(string == 'next') 
 			? translateTimeline(timelineComponents, translateValue - wrapperWidth + eventsMinDistance, wrapperWidth - timelineTotWidth)
 			: translateTimeline(timelineComponents, translateValue + wrapperWidth - eventsMinDistance);
 	}
@@ -158,7 +158,7 @@ jQuery(document).ready(function($){
 		if ( newContent.length > 0 ) { //if there's a next/prev event - show it
 			var selectedDate = timelineComponents['eventsWrapper'].find('.selected'),
 				newEvent = ( string == 'next' ) ? selectedDate.parent('li').next('li').children('a') : selectedDate.parent('li').prev('li').children('a');
-
+			
 			updateFilling(newEvent, timelineComponents['fillingLine'], timelineTotWidth);
 			updateVisibleContent(newEvent, timelineComponents['eventsContent']);
 			newEvent.addClass('selected');
@@ -202,7 +202,7 @@ jQuery(document).ready(function($){
 	}
 
 	function setDatePosition(timelineComponents, min) {
-		for (i = 0; i < timelineComponents['timelineDates'].length; i++) {
+		for (i = 0; i < timelineComponents['timelineDates'].length; i++) { 
 		    var distance = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][i]),
 		    	distanceNorm = Math.round(distance/timelineComponents['eventsMinLapse']) + 2;
 		    timelineComponents['timelineEvents'].eq(i).css('left', distanceNorm*min+'px');
@@ -217,7 +217,7 @@ jQuery(document).ready(function($){
 		timelineComponents['eventsWrapper'].css('width', totalWidth+'px');
 		updateFilling(timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents['fillingLine'], totalWidth);
 		updateTimelinePosition('next', timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents);
-
+	
 		return totalWidth;
 	}
 
@@ -304,7 +304,7 @@ jQuery(document).ready(function($){
 	function minLapse(dates) {
 		//determine the minimum distance among events
 		var dateDistances = [];
-		for (i = 1; i < dates.length; i++) {
+		for (i = 1; i < dates.length; i++) { 
 		    var distance = daydiff(dates[i-1], dates[i]);
 		    dateDistances.push(distance);
 		}
@@ -346,23 +346,23 @@ jQuery(document).ready(function() {
     var ellipsestext = "...";
     var moretext = "Show more >";
     var lesstext = "Show less";
-
+    
 
     jQuery('.more').each(function() {
         var content = jQuery(this).html();
-
+ 
         if(content.length > showChar) {
-
+ 
             var c = content.substr(0, showChar);
             var h = content.substr(showChar, content.length - showChar);
-
+ 
             var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
-
+ 
             jQuery(this).html(html);
         }
-
+ 
     });
-
+ 
     jQuery(".morelink").click(function(){
         if(jQuery(this).hasClass("less")) {
             jQuery(this).removeClass("less");
@@ -377,7 +377,8 @@ jQuery(document).ready(function() {
     });
 });
 </script>
-<style type="text/css" data-type="vc_custom-css">/* --------------------------------
+<style type="text/css" data-type="vc_custom-css">/* -------------------------------- 
+/* -------------------------------- 
 
 Primary style
 
@@ -398,13 +399,12 @@ body {
 }
 
 a {
-  color: #7b9d6f;
   text-decoration: none;
 }
 
-/* --------------------------------
+/* -------------------------------- 
 
-Main Components
+Main Components 
 
 -------------------------------- */
 .cd-horizontal-timeline {
@@ -442,7 +442,7 @@ Main Components
   height: 100%;
   margin: 0 40px;
   overflow: hidden;
-    background-image: url(../wp-content/uploads/2016/09/Banana-leaf-1.png);
+    background-image: url(http://dev.flarepath.co.in/websites/globalceo/wp-content/uploads/2016/09/Banana-leaf-1.png);
     background-size: 100% auto;
     background-position: center center;
 }
@@ -597,7 +597,7 @@ Main Components
   -ms-transform: translateX(-50%) translateY(-50%);
   -o-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
-  background: url(../wp-content/uploads/cd-arrow.svg) no-repeat 0 0;
+  background: url(http://dev.flarepath.co.in/websites/globalceo/wp-content/uploads/cd-arrow.svg) no-repeat 0 0;
 }
 .cd-timeline-navigation a.prev {
   left: 0;
@@ -628,7 +628,7 @@ Main Components
   -webkit-transition: height 0.4s;
   -moz-transition: height 0.4s;
   transition: height 0.4s;
-  height: 1000px !important;
+  height: 1200px !important;
 }
 .cd-horizontal-timeline .events-content li {
   position: absolute;
@@ -815,103 +815,103 @@ table {
 .morelink {
     display: block;
 }
-p.eventdetails, .cd-horizontal-timeline .events-content li h5{padding-top: 10px;}</style><noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
-
-
+a.morelink{
+  color: #15756E !important;}
+p.eventdetails, .cd-horizontal-timeline .events-content li h5{padding-top: 10px;}
 </head>
 
 
 <body class="page page-id-447 page-template-default ascend wpb-js-composer js-comp-ver-4.12 vc_responsive" data-footer-reveal="false" data-footer-reveal-shadow="none" data-cae="easeOutCubic" data-cad="650" data-aie="none" data-ls="pretty_photo" data-apte="standard" data-hhun="0" data-fancy-form-rcs="default" data-form-style="default" data-is="minimal" data-button-style="default" data-header-inherit-rc="false" data-header-search="false" data-animated-anchors="true" data-ajax-transitions="true" data-full-width-header="false" data-slide-out-widget-area="false" data-slide-out-widget-area-style="slide-out-from-right" data-user-set-ocm="off" data-loading-animation="none" data-bg-header="true" data-ext-responsive="true" data-header-resize="0" data-header-color="light"  data-smooth-scrolling="0" data-permanent-transparent="1" data-responsive="1" >
 
 
- <div id="header-space" data-header-mobile-fixed='1'></div>
+ <div id="header-space" data-header-mobile-fixed='1'></div> 
 
 <div id="header-outer" data-has-menu="false" data-transparent-header="true" data-remove-border="true" class="transparent" data-mobile-fixed="1" data-ptnm="false" data-lhe="default" data-user-set-bg="#ffffff" data-format="default" data-permanent-transparent="1" data-cart="false" data-transparency-option="" data-shrink-num="6" data-full-width="false" data-using-secondary="0" data-using-logo="" data-logo-height="" data-m-logo-height="24" data-padding="28" data-header-resize="0">
-
-
+	
+		
 	<header id="top">
-
+		
 		<div class="container">
-
+			
 			<div class="row">
-
+				  
 				<div class="col span_3">
+					
+					<a id="logo" href="http://flarepath.in.md-in-50.webhostbox.net/globalceo" class="no-image">
 
-					<a id="logo" href="/" class="no-image">
-
-						GlobalCEO
+						GlobalCEO 
 
 					</a>
 
 				</div><!--/span_3-->
-
+				
 				<div class="col span_9 col_last">
-
-
+					
+										
 					<nav>
 						<ul class="buttons" data-user-set-ocm="off">
 							<li id="search-btn"><div><a href="#searchbox"><span class="icon-salient-search" aria-hidden="true"></span></a></div> </li>
-
+						
 													</ul>
-						<ul class="sf-menu">
+						<ul class="sf-menu">	
 							<li class="no-menu-assigned"><a href="#">No menu assigned</a></li>						</ul>
-
+						
 					</nav>
-
+					
 				</div><!--/span_9-->
-
+			
 			</div><!--/row-->
-
+			
 		</div><!--/container-->
-
+		
 	</header>
-
-
-	<div class="ns-loading-cover"></div>
-
+	
+	
+	<div class="ns-loading-cover"></div>		
+	
 
 </div><!--/header-outer-->
 
 
 <div id="search-outer" class="nectar">
-
+		
 	<div id="search">
-
+	  	 
 		<div class="container">
-
+		  	 	
 		     <div id="search-box">
-
+		     	
 		     	<div class="col span_12">
-			      	<form action="/" method="GET">
+			      	<form action="http://flarepath.in.md-in-50.webhostbox.net/globalceo" method="GET">
 			      		<input type="text" name="s"  value="Start Typing..." data-placeholder="Start Typing..." />
 			      	</form>
 			      	<span><i>Press enter to begin your search</i></span>		        </div><!--/span_12-->
-
+			      
 		     </div><!--/search-box-->
-
+		     
 		     <div id="close"><a href="#"><span class="icon-salient-x" aria-hidden="true"></span></a></div>
-
+		     
 		 </div><!--/container-->
-
+	    
 	</div><!--/search-->
-
-</div><!--/search-outer-->
+	  
+</div><!--/search-outer--> 
 
 <div id="mobile-menu" data-mobile-fixed="1">
-
+	
 	<div class="container">
 		<ul>
-			<li><a href="#">No menu assigned!</a></li>
+			<li><a href="#">No menu assigned!</a></li>		
 		</ul>
 	</div>
-
+	
 </div>
 
 
 <div id="ajax-loading-screen" data-disable-fade-on-click="0" data-effect="standard" data-method="standard">
-
-			<span class="loading-icon none">
-			<span class="default-loading-icon spin"></span>
+	
+			<span class="loading-icon none"> 
+			<span class="default-loading-icon spin"></span> 
 		</span>
 	</div>
 
@@ -920,11 +920,11 @@ p.eventdetails, .cd-horizontal-timeline .events-content li h5{padding-top: 10px;
 
 
 <div class="container-wrap">
-
+	
 	<div class=" main-content">
-
+		
 		<div class="row">
-
+			
 			<div id="nectar_fullscreen_rows" data-animation="zoom-out-parallax" data-row-bg-animation="ken_burns" data-animation-speed="medium" data-content-overflow="scrollbar" data-dot-navigation="transparent" data-footer="none" data-anchors="off">
 	<div id="fws_57ed7b50eddba"  data-midnight="dark" data-bg-mobile-hidden="" class="wpb_row vc_row-fluid vc_row full-width-content standard_section   "  style=""><div class="full-page-inner-wrap-outer"><div class="full-page-inner-wrap" data-name="" data-content-pos="full_height"><div class="full-page-inner"><div class="row-bg-wrap"> <div class="row-bg using-image   "  style="background-image: url(../wp-content/uploads/2016/09/Bg-1.png); background-position: left top; background-repeat: no-repeat; " data-color_overlay="" data-color_overlay_2="" data-gradient_direction="" data-overlay_strength="0.3" data-enable_gradient="false"></div> </div><div class="col span_12 dark left">
 	<div  class="vc_col-sm-12 wpb_column column_container vc_column_container col no-extra-padding"  data-bg-cover="" data-padding-pos="top-bottom" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-hover-bg="" data-hover-bg-opacity="1" data-animation="" data-delay="0">
@@ -935,7 +935,7 @@ p.eventdetails, .cd-horizontal-timeline .events-content li h5{padding-top: 10px;
 	<div  class="vc_col-sm-12 wpb_column column_container vc_column_container col padding-2-percent"  data-bg-cover="" data-padding-pos="top-bottom" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-hover-bg="" data-hover-bg-opacity="1" data-animation="" data-delay="0">
 		<div class="vc_column-inner">
 		<div class="wpb_wrapper">
-
+			
 	<div class="wpb_text_column wpb_content_element " >
 		<div class="wpb_wrapper">
 			<h1 style="text-align: center;">CHENNAI</h1>
@@ -944,9 +944,9 @@ p.eventdetails, .cd-horizontal-timeline .events-content li h5{padding-top: 10px;
 		</div>
 	</div>
 
-		</div>
+		</div> 
 	</div>
-	</div>
+	</div> 
 </div></div>
 	<div class="wpb_raw_code wpb_content_element wpb_raw_html">
 		<div class="wpb_wrapper">
@@ -972,7 +972,7 @@ p.eventdetails, .cd-horizontal-timeline .events-content li h5{padding-top: 10px;
 				<span class="filling-line" aria-hidden="true"></span>
 			</div> <!-- .events -->
 		</div> <!-- .events-wrapper -->
-
+			
 		<ul class="cd-timeline-navigation">
 			<li><a href="#0" class="prev inactive">Prev</a></li>
 			<li><a href="#0" class="next">Next</a></li>
@@ -982,23 +982,23 @@ p.eventdetails, .cd-horizontal-timeline .events-content li h5{padding-top: 10px;
 	<div class="events-content" height="1000px">
 		<ol>
                         <li class="selected" data-date="16/01/2014">
-
-					<h5>Your Guide for the day: </h5>
-<p>Revathi Desikan will be your guide for today.<br>
-She will meet you at the reception at 07:00 hours.</p>
-<h5>About Revathi  </h5>
-<img src="../wp-content/uploads/2016/09/Untitled-1.png" style="width:120px;float:left">
-<p class="more">Workplace Services Manager for South, Revathi Desikan, completed 30 years of service with HUL in October 2015.
-She started her career in Logistics, and handled various roles in Planning, MIS and Commercial.
-That&#39;s not all! Revathi received the CEO Award for 2015 and South Asia HR Award for her splendid work during the recent Chennai floods.
-She is a postgraduate in Commerce and her husband Desikan is a water treatment professional. Her interests include cooking and interacting with differently abled children.
-</p><br><br>
 <h5>Weather Forecast:</h5>
 <p>Temperature is averaging at 33&deg; Celsius (91&deg; Fahrenheit).<br> Your day will be partly cloudy with a small chance of thunderstorms.<br> But fret not, as your cars have been stocked with umbrellas!</p>
 <h5>What should you wear?</h5>
 <p>As you will be visiting a temple today, conservative apparel with easily removable footwear (such as sandals or loafers) are recommended.</p>
 <h5>What should you carry?</h5>
 <p>A camera, a shopping list, your tab, a curious disposition and a cheery attitude!</p>
+<h5>Your Guide for the day: </h5>
+<p>Revathi Desikan will be your guide for today.<br>
+She will meet you at the reception at 7:00AM.</p>
+<h5>About Revathi  </h5>
+<img src="../wp-content/uploads/2016/09/Untitled-1.png" style="width:120px;float:left">
+<p class="more">Workplace Services Manager for South, Revathi Desikan, completed 30 years of service with HUL in October 2015.
+She started her career in Logistics, and handled various roles in Planning, MIS and Commercial.
+That&#39;s not all! Revathi received the CEO Award for 2015 and South Asia HR Award for her splendid work during the recent Chennai floods.
+She is a postgraduate in Commerce and her husband Desikan is a water treatment professional. Her interests include cooking and interacting with differently abled children.
+</p><br>
+
 
 			</li>
 			<br>
@@ -1162,7 +1162,7 @@ They will meet you at the reception at 7:30 PM.
 <img src="../wp-content/uploads/2016/09/Ashish.png"  style="width:125px;float:left">
 <p class="more">
   General Manager for South India handling the largest sales unit (branch) for Unilever India, Ashish has been with Unilever for over 10 years. He has worked across Customer Development and Marketing roles across India and South East Asia. He has worked in General Trade, Modern Trade, Global Brand Development and Regional Brand Development (for South East Asia) in Oral Care Category. He was heading the Rural Business for Unilever India prior to taking over his current role as GM – South India. Ashish holds a Chemical Engineering degree from IIT Roorkee and a Business Management degree from Delhi University, and has worked with Colgate Palmolive prior to Unilever.<br>
-Ashish is married to Prajna and they have a five year old son, Vihaan. He is fond of outdoor sports and his latest passions are long distance running, cycling and playing badminton!
+Ashish is married to Prajna and they have a five year old son, Vihaan. Ashish is fond of outdoor sports and his latest passions are long distance running, cycling and playing badminton!
 </p><br>
 <br>
 <h5>About Prajna </h5>
@@ -1185,18 +1185,18 @@ Ashish is married to Prajna and they have a five year old son, Vihaan. He is fon
 	<div  class="vc_col-sm-2 wpb_column column_container vc_column_container col no-extra-padding"  data-bg-cover="" data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-hover-bg="" data-hover-bg-opacity="1" data-animation="" data-delay="0">
 		<div class="vc_column-inner">
 		<div class="wpb_wrapper">
-
-		</div>
+			
+		</div> 
 	</div>
-	</div>
+	</div> 
 
 	<div  class="vc_col-sm-8 wpb_column column_container vc_column_container col no-extra-padding"  data-bg-cover="" data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-hover-bg="" data-hover-bg-opacity="1" data-animation="" data-delay="0">
 		<div class="vc_column-inner">
 		<div class="wpb_wrapper">
-
+			
 	<div class="wpb_text_column wpb_content_element " >
 		<div class="wpb_wrapper">
-			<p style="text-align: center;"><a class="nectar-button large accent-color regular-button"  href="#" data-color-override="#316c56" data-hover-color-override="false" data-hover-text-color-override="#fff"><span>SHOPPING</span></a>    <a class="nectar-button large extra-color-1 regular-button"  href="#" data-color-override="#eb4900" data-hover-color-override="false" data-hover-text-color-override="#fff"><span>STAY</span></a>    <a class="nectar-button large extra-color-2 regular-button"  href="#" data-color-override="#a22038" data-hover-color-override="false" data-hover-text-color-override="#fff"><span>FOOD</span></a>    <a class="nectar-button large extra-color-3 regular-button"  href="#" data-color-override="#422754" data-hover-color-override="false" data-hover-text-color-override="#fff"><span>SIGHTSEEING</span></a></p>
+			<p style="text-align: center;"><a class="nectar-button large accent-color regular-button"  href="../shopping-internal/index.html" data-color-override="#316c56" data-hover-color-override="false" data-hover-text-color-override="#fff"><span>SHOPPING</span></a>    <a class="nectar-button large extra-color-1 regular-button"  href="../stay-internal/index.html" data-color-override="#eb4900" data-hover-color-override="false" data-hover-text-color-override="#fff"><span>STAY</span></a>    <a class="nectar-button large extra-color-2 regular-button"  href="../food-internal/index.html" data-color-override="#a22038" data-hover-color-override="false" data-hover-text-color-override="#fff"><span>FOOD</span></a>    <a class="nectar-button large extra-color-3 regular-button"  href="../sightseeing-internal/index.html" data-color-override="#422754" data-hover-color-override="false" data-hover-text-color-override="#fff"><span>SIGHTSEEING</span></a></p>
 
 		</div>
 	</div>
@@ -1208,108 +1208,108 @@ Ashish is married to Prajna and they have a five year old son, Vihaan. He is fon
 		</div>
 	</div>
 
-		</div>
+		</div> 
 	</div>
-	</div>
+	</div> 
 
 	<div  class="vc_col-sm-2 wpb_column column_container vc_column_container col no-extra-padding"  data-bg-cover="" data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-hover-bg="" data-hover-bg-opacity="1" data-animation="" data-delay="0">
 		<div class="vc_column-inner">
 		<div class="wpb_wrapper">
-
-		</div>
+			
+		</div> 
 	</div>
-	</div>
+	</div> 
 </div></div><div class="img-with-aniamtion-wrap center" data-max-width="100%"><div class="inner"><img data-shadow="none" data-shadow-direction="middle" class="img-with-animation " data-delay="0" height="100%" width="100%" data-animation="fade-in" src="../wp-content/uploads/2016/09/Lower-border.png" alt="" /></div></div>
-			</div>
+			</div> 
 		</div>
-	</div>
+	</div> 
 </div></div></div></div></div><!--inner-wrap-->
 </div>
 		</div><!--/row-->
-
+		
 	</div><!--/container-->
-
+	
 </div><!--/container-wrap-->
 
 
 <div id="footer-outer" data-midnight="light" data-using-widget-area="true">
-
-
-
+	
+	
+			
 	<div id="footer-widgets">
-
+		
 		<div class="container">
-
+			
 			<div class="row">
-
-
+				
+								
 				<div class="col span_3">
 				      <!-- Footer widget area 1 -->
-
-		              	  <div class="widget">
+		              	
+		              	  <div class="widget">		
 						  	 <h4 class="widgettitle">Widget Area 1</h4>
 						 	 <p class="no-widget-added"><a href="../wp-login3a96.html">Click here to assign a widget to this area.</a></p>
 				     	  </div>
 				     				</div><!--/span_3-->
-
+				
 				<div class="col span_3">
 					 <!-- Footer widget area 2 -->
-
-		                  <div class="widget">
+		             	
+		                  <div class="widget">			
 						 	 <h4 class="widgettitle">Widget Area 2</h4>
 						 	 <p class="no-widget-added"><a href="../wp-login3a96.html">Click here to assign a widget to this area.</a></p>
 				     	  </div>
-
+				     				     
 				</div><!--/span_3-->
-
+				
 									<div class="col span_3">
 						 <!-- Footer widget area 3 -->
-
-			              	  <div class="widget">
+			              		
+			              	  <div class="widget">			
 							  	<h4 class="widgettitle">Widget Area 3</h4>
 							  	<p class="no-widget-added"><a href="../wp-login3a96.html">Click here to assign a widget to this area.</a></p>
-							  </div>
-
+							  </div>		   
+					     					     
 					</div><!--/span_3-->
-
+								
 									<div class="col span_3">
 						 <!-- Footer widget area 4 -->
-
-			              	<div class="widget">
+			              	
+			              	<div class="widget">		
 							    <h4>Widget Area 4</h4>
 							    <p class="no-widget-added"><a href="../wp-login3a96.html">Click here to assign a widget to this area.</a></p>
-							 </div><!--/widget-->
-
+							 </div><!--/widget-->	
+					     					     
 					</div><!--/span_3-->
-
+								
 			</div><!--/row-->
-
+			
 		</div><!--/container-->
-
+	
 	</div><!--/footer-widgets-->
-
-
-
+	
+	
+	
 		<div class="row" id="copyright">
-
+			
 			<div class="container">
-
+				
 				<div class="col span_5">
-
+					
 											<p>&copy; 2016 GlobalCEO.  </p>
-
+										
 				</div><!--/span_5-->
-
+				
 				<div class="col span_7 col_last">
 					<ul id="social">
 																																																																																																																							</ul>
 				</div><!--/span_7-->
-
+			
 			</div><!--/container-->
-
+			
 		</div><!--/row-->
-
-
+		
+		
 </div><!--/footer-outer-->
 
 
@@ -1331,7 +1331,7 @@ var nectarLove = {"ajaxurl":"http:\/\/flarepath.in.md-in-50.webhostbox.net\/glob
 <script type='text/javascript' src='../wp-content/themes/salient/js/initf9ae.js?ver=7.5.02'></script>
 <script type='text/javascript' src='../wp-includes/js/wp-embed.min1c9b.js?ver=4.6.1'></script>
 <script type='text/javascript' src='../wp-content/plugins/js_composer_salient/assets/js/dist/js_composer_front.min0147.js?ver=4.12'></script>
-
+	
 
 </body>
 
