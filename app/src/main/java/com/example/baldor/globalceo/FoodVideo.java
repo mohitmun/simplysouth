@@ -12,12 +12,12 @@ public class FoodVideo extends VideoScreen{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myOnCreate(R.raw.food_intro, MainActivity.class);
+        myOnCreate(R.raw.food_intro, Food.class);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        jump(MainActivity.class);
+        jump(Food.class);
         return true;
     }
 

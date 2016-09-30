@@ -12,12 +12,12 @@ public class SightVideo extends VideoScreen{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myOnCreate(R.raw.sightsee_intro, MainActivity.class);
+        myOnCreate(R.raw.sightsee_intro, Sight.class);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        jump(MainActivity.class);
+        jump(Sight.class);
         return true;
     }
 

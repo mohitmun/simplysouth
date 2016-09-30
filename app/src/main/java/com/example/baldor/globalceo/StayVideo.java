@@ -12,12 +12,12 @@ public class StayVideo extends VideoScreen{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myOnCreate(R.raw.stay_intro, MainActivity.class);
+        myOnCreate(R.raw.stay_intro, Stay.class);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        jump(MainActivity.class);
+        jump(Stay.class);
         return true;
     }
 

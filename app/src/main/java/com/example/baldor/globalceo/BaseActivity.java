@@ -24,12 +24,13 @@ import android.widget.VideoView;
  */
 
 public class BaseActivity extends AppCompatActivity {
+    WebView mWebView;
     public void myOnCreate(String url, int small_video){
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        copyAssets("globalceo");
         setContentView(R.layout.activity_main);
-        WebView mWebView = (WebView) findViewById(R.id.webview);
+        mWebView = (WebView) findViewById(R.id.webview);
         mWebView.loadUrl(url);
         WebChromeClient chromeClient = new WebChromeClient(){
             @Override
@@ -60,6 +61,16 @@ public class BaseActivity extends AppCompatActivity {
 
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
+            public void onPageFinished(WebView view, String url) {
+                if(videoHolder != null){
+                    View v = findViewById(R.id.small_videoview_wrapper);
+                    v.setVisibility(View.VISIBLE);
+                    videoHolder.start();
+                }
+                super.onPageFinished(view, url);
+            }
+
+            @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (url.contains("shopping")) {
                     // magic
@@ -75,9 +86,11 @@ public class BaseActivity extends AppCompatActivity {
                     startActivity(new Intent(BaseActivity.this, SightVideo.class));
                     return true;
                 }
+
                 return false;
             }
         });
+
         mWebView.getSettings().setJavaScriptEnabled(true);
 //        mWebView.getSettings().setpl
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -100,9 +113,7 @@ public class BaseActivity extends AppCompatActivity {
 //            }
 //        });
         if(small_video != 0){
-            View v = findViewById(R.id.small_videoview_wrapper);
-            v.setVisibility(View.VISIBLE);
-            VideoView videoHolder = (VideoView)findViewById(R.id.small_videoview);
+            videoHolder = (VideoView)findViewById(R.id.small_videoview);
             Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + small_video);
             videoHolder.setVideoURI(video);
             MediaController mc = new MediaController(this);
@@ -127,10 +138,11 @@ public class BaseActivity extends AppCompatActivity {
                     }
                 }
             });
-            videoHolder.start();
+
         }
 
     }
+    VideoView videoHolder;
 
 
     private void mute() {
@@ -142,5 +154,14 @@ public class BaseActivity extends AppCompatActivity {
         am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
         am.setStreamMute(AudioManager.STREAM_MUSIC, false);
     }
+
+    @Override
+    public void onBackPressed() {
+        if(mWebView != null){
+            mWebView.setWebViewClient(new WebViewClient());
+        }
+        super.onBackPressed();
+    }
+
     public static AudioManager am;
 }
