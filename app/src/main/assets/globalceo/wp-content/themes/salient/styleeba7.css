@@ -3118,7 +3118,7 @@ body .wpb_text_column h2:last-child, body .wpb_text_column h3:last-child {
 
 
 /* Full width content solumn sizing*/
-
+img{ padding: 15px;}
 .wpb_row .span_12 > .col.padding-1-percent, .column-inner.padding-1-percent { padding: 1%; }
 .wpb_row .span_12 > .col.padding-2-percent, .column-inner.padding-2-percent { padding: 2%; }
 .wpb_row .span_12 > .col.padding-3-percent, .column-inner.padding-3-percent { padding: 3%; }
